@@ -16,9 +16,6 @@ import java.net.MalformedURLException;
 public class Main {
 
     public static void main(String[] args) throws Exception{
-//        ApiServlet apiServlet = new ApiServlet();
-//        RegistrationServlet registrationServlet = new RegistrationServlet(new UserService());
-//        LoginServlet loginServlet = new LoginServlet(new UserService());
 
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.addServlet(new ServletHolder(new ApiServlet()), "/api/*");
@@ -39,19 +36,6 @@ public class Main {
         server.start();
         System.out.println("Server started");
         server.join();
-
-//        ResourceHandler resource_handler = new ResourceHandler();
-//        resource_handler.setResourceBase("templates");
-//
-//        HandlerList handlers = new HandlerList();
-//        final Handler[] handler = {resource_handler, context};
-//        handlers.setHandlers(handler);
-//
-//        Server server = new Server(8080);
-//        server.setHandler(handlers);
-//
-//        server.start();
-//        server.join();
 
     }
 }
