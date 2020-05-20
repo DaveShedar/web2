@@ -14,17 +14,19 @@ import java.util.Optional;
 
 @WebServlet(urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
+//    public LoginServlet(UserService userService) {
+//    }
 
-    UserService userService;
-
-    public LoginServlet(UserService userService) {
-        this.userService = userService;
-    }
+//    private final UserService userService;
+//
+//    public LoginServlet(UserService userService) {
+//        this.userService = userService;
+//    }
 
 //    @Override
 //    public void doGet(HttpServletRequest request,
 //                      HttpServletResponse response) throws ServletException, IOException {
-//        User user = userService.getUserById(userService.maxId.get());
+//        User user = UserService.getUserService().getUserById(UserService.getUserService().maxId.get());
 //        if (user == null) {
 //            System.out.println("doGet Loginservlet, user == null. UNAUTH");
 //            response.setContentType("text/html;charset=utf-8");
@@ -53,8 +55,7 @@ public class LoginServlet extends HttpServlet {
 
         User user = new User(email, password);
 
-        if(userService.isExistsThisUser(user)){
-            userService.authMap.put(userService.getCurrentId(), user);
+        if(UserService.getUserService().isExistsThisUser(user)){
             response.setContentType("text/html;charset=utf-8");
             System.out.println("LoginServlet, put in authMap. AUTH");
             response.setStatus(HttpServletResponse.SC_OK);
