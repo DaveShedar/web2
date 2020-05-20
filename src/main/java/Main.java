@@ -19,8 +19,8 @@ public class Main {
 
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.addServlet(new ServletHolder(new ApiServlet()), "/api/*");
-        context.addServlet(new ServletHolder(new LoginServlet(new UserService())), "/login");
-        context.addServlet(new ServletHolder(new RegistrationServlet(new UserService())), "/register");
+        context.addServlet(new ServletHolder(new LoginServlet()), "/login");
+        context.addServlet(new ServletHolder(new RegistrationServlet()), "/register");
 
 
         ResourceHandler resource_handler = new ResourceHandler();
@@ -36,6 +36,5 @@ public class Main {
         server.start();
         System.out.println("Server started");
         server.join();
-
     }
 }
