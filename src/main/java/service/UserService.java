@@ -8,13 +8,24 @@ import java.util.concurrent.atomic.AtomicLong;
 
 public class UserService {
 
+    private static UserService userService;
+    public static UserService getUserService(){
+        if(userService == null){
+            userService = new UserService();
+        }
+        return userService;
+    }
+
+    private UserService(){
+    }
+
     /* хранилище данных */
     private Map< Long, User > dataBase = Collections.synchronizedMap(new HashMap<>());
 
     /* счетчик id */
     private AtomicLong maxId = new AtomicLong(0);
     /* список авторизованных пользователей */
-    public Map< Long, User > authMap = Collections.synchronizedMap(new HashMap<>());
+    private Map< Long, User > authMap = Collections.synchronizedMap(new HashMap<>());
 
 
 
@@ -54,6 +65,8 @@ public class UserService {
             User userInDataBase = entry.getValue();
             System.out.println("userInDataBase: " + userInDataBase.getEmail() + ":" + userInDataBase.getPassword());
             if (userInDataBase.getEmail().equals(user.getEmail()) & (userInDataBase.getPassword().equals(user.getPassword()))) {
+                authMap.put(getCurrentId(), user);
+                System.out.println("user in isExistsThisUser get to authMap: " + user.getEmail() + ":" + user.getPassword() + ":" + getCurrentId());
                 return true;
             }
         }
