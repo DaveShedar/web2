@@ -13,12 +13,7 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = {"/register"})
 public class RegistrationServlet extends HttpServlet {
-
-    UserService userService;
-
-    public RegistrationServlet(UserService userService) {
-        this.userService = userService;
-    }
+    
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,9 +30,9 @@ public class RegistrationServlet extends HttpServlet {
         }
 
         System.out.println("Registration servlet, add new User");
-        User user = new User(userService.getNewId(), email, password);
-        System.out.println(userService.addUser(user));
-        System.out.println("Registration servlet, add new User" + ". Current id is " + userService.getCurrentId());
+        User user = new User(UserService.getUserService().getNewId(), email, password);
+        System.out.println(UserService.getUserService().addUser(user));
+        System.out.println("Registration servlet, add new User" + ". Current id is " + UserService.getUserService().getCurrentId());
         System.out.println(user.getEmail() + " : " +  user.getPassword() + " : " + user.getId());
         response.setContentType("text/html;charset=utf-8");
         response.setStatus(HttpServletResponse.SC_OK);
